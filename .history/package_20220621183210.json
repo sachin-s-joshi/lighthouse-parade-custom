@@ -1,11 +1,9 @@
 {
-  "name": "lighthouse-parade-custom",
-  "version": "2.2.0",
+  "name": "lighthouse-parade",
+  "version": "2.1.0",
   "description": "A Node.js command line tool that crawls a domain and compiles a report with lighthouse performance data for every page.",
   "bin": "dist/src/cli.js",
-  "files": [
-    "dist/src/*.js"
-  ],
+  "files": ["dist/src/*.js"],
   "repository": "cloudfour/lighthouse-parade",
   "scripts": {
     "test": "vitest run",
@@ -52,9 +50,7 @@
     "vitest": "^0.13.1"
   },
   "eslintConfig": {
-    "extends": [
-      "plugin:@cloudfour/recommended"
-    ]
+    "extends": ["plugin:@cloudfour/recommended"]
   },
   "prettier": {
     "singleQuote": true
