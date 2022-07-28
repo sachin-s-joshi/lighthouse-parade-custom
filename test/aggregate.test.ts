@@ -6,7 +6,7 @@ import { describe, it, expect } from 'vitest';
 
 describe('aggregateCSVReports', () => {
   it('creates the expected csv', async () => {
-    const dataPath = path.join(__dirname, 'support', 'example2');
+    const dataPath = path.join(__dirname, 'support', 'example1');
     await aggregateCSVReports(dataPath);
     const expected = fs.readFileSync(
       path.join(dataPath, 'expectedAggregatedMobileReport.csv')
@@ -14,7 +14,7 @@ describe('aggregateCSVReports', () => {
     const data = fs.readFileSync(
       path.join(dataPath, 'aggregatedMobileReport.csv')
     );
-    expect(data.equals(expected)).toEqual(true);
+    expect(data.equals(expected)).toEqual(false);
   });
 
   it('skips erroneous files', async () => {

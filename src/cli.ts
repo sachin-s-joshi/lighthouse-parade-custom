@@ -77,6 +77,7 @@ sade('lighthouse-parade <url> [dataDirectory]', true)
     '--exclude-path-glob',
     'Specify a glob (in quotes) for paths to exclude. Links to matched paths will not be crawled. The entry page will be crawled regardless of this flag. This flag can be specified multiple times to exclude multiple paths. `*` matches one url segment, `**` matches multiple segments. Trailing slashes are ignored.'
   )
+  .option('--preset','Specify Desktop or Mobile','desktop')
   .action(
     (
       url,
@@ -95,6 +96,11 @@ sade('lighthouse-parade <url> [dataDirectory]', true)
       const ignoreRobotsTxt: boolean = opts['ignore-robots'];
       const reportsDirPath = path.join(dataDirPath, 'reports');
       fs.mkdirSync(reportsDirPath, { recursive: true });
+
+      const preset: string = opts.preset;
+      if(preset!=="desktop" && preset!=="mobile"){
+        throw new Error('Preset can have value only as desktop OR mobile')
+      }
 
       const userAgent: unknown = opts['crawler-user-agent'];
       if (userAgent !== undefined && typeof userAgent !== 'string') {
@@ -140,6 +146,7 @@ sade('lighthouse-parade <url> [dataDirectory]', true)
         maxCrawlDepth,
         includePathGlob: includePathGlob as string[],
         excludePathGlob: excludePathGlob as string[],
+        preset
       });
 
       const enum State {

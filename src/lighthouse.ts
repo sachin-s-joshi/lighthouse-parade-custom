@@ -26,7 +26,7 @@ export type LighthouseEvents = {
   error: (message: Error) => void;
 };
 
-export const runLighthouseReport = (url: string, maxConcurrency?: number) => {
+export const runLighthouseReport = (url: string, preset: string, maxConcurrency?: number) => {
   if (maxConcurrency) lighthouseLimit = maxConcurrency;
   const { on, emit } = createEmitter<LighthouseEvents>();
   const run = () => {
@@ -34,6 +34,7 @@ export const runLighthouseReport = (url: string, maxConcurrency?: number) => {
     const lighthouseProcess = spawn('node', [
       lighthouseCli,
       url,
+      `--preset=${preset}`,
       '--output=csv',
       '--output-path=stdout',
       '--only-categories=accessibility',

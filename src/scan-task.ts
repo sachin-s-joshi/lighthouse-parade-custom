@@ -14,6 +14,7 @@ interface ScanOptions extends CrawlOptions {
   crawler?: typeof defaultCrawler;
   lighthouse?: typeof runLighthouseReport;
   lighthouseConcurrency: number;
+  preset:string;
 }
 
 type ScanEvents = {
@@ -38,6 +39,7 @@ export const scan = (
     lighthouse = runLighthouseReport,
     dataDirectory,
     lighthouseConcurrency,
+    preset,
     ...opts
   }: ScanOptions
 ) => {
@@ -57,7 +59,7 @@ export const scan = (
     emit('urlFound', url, contentType, bytes, statusCode);
     lighthousePromises.push(
       new Promise((resolve) => {
-        lighthouse(url, lighthouseConcurrency)
+        lighthouse(url, preset, lighthouseConcurrency)
           .on('begin', () => emit('reportBegin', url))
           .on('complete', (reportData) => {
             emit('reportComplete', url, reportData);

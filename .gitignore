@@ -1,5 +1,6 @@
 .DS_Store
 lighthouse-parade-data
 node_modules
-
 .history
+test/support/*
+dist
